@@ -9,21 +9,52 @@
   <body class="bg-white text-gray-800 font-sans">
    <!-- Navigation Bar -->
     <header class="fixed top-4 left-4 z-50">
-      <div class="group relative">
-        <button class="flex flex-col w-8 h-6 justify-between items-center cursor-pointer">
-          <span class="block h-1 w-full bg-gray-700 rounded"></span>
-          <span class="block h-1 w-full bg-gray-700 rounded"></span>
-          <span class="block h-1 w-full bg-gray-700 rounded"></span>
-        </button>
-        <nav class="absolute top-10 left-0 bg-white shadow-lg rounded-lg p-4 opacity-0 group-hover:opacity-100 group-hover:visible invisible transition-opacity duration-300 space-y-2">
-          <a href="index.html" class="block text-gray-700 hover:text-blue-500">Home</a>
-          <a href="about.html" class="block text-gray-700 hover:text-blue-500">About</a>
-          <a href="pricing.html" class="block text-gray-700 hover:text-blue-500">Pricing</a>
-          <a href="contact.html" class="block text-gray-700 hover:text-blue-500">Contact</a>
-          <a href="people.html" class="block text-gray-700 hover:text-blue-500">People</a>
-        </nav>
-      </div>
-    </header>
+  <div class="relative">
+    <button id="menuToggle" class="flex flex-col w-8 h-6 justify-between items-center cursor-pointer z-50 relative">
+      <span class="block h-1 w-full bg-gray-700 rounded"></span>
+      <span class="block h-1 w-full bg-gray-700 rounded"></span>
+      <span class="block h-1 w-full bg-gray-700 rounded"></span>
+    </button>
+    <nav id="menu" class="absolute top-10 left-0 bg-white shadow-lg rounded-lg p-4 opacity-0 invisible transition-opacity duration-300 space-y-2 pointer-events-none">
+      <a href="index.html" class="block text-gray-700 hover:text-blue-500">Home</a>
+      <a href="about.html" class="block text-gray-700 hover:text-blue-500">About</a>
+      <a href="pricing.html" class="block text-gray-700 hover:text-blue-500">Pricing</a>
+      <a href="contact.html" class="block text-gray-700 hover:text-blue-500">Contact</a>
+      <a href="people.html" class="block text-gray-700 hover:text-blue-500">People</a>
+    </nav>
+  </div>
+
+  <script>
+    const toggle = document.getElementById("menuToggle");
+    const menu = document.getElementById("menu");
+
+    let hideTimeout;
+
+    toggle.addEventListener("mouseenter", () => {
+      clearTimeout(hideTimeout);
+      menu.classList.remove("opacity-0", "invisible", "pointer-events-none");
+      menu.classList.add("opacity-100", "visible", "pointer-events-auto");
+    });
+
+    toggle.addEventListener("mouseleave", () => {
+      hideTimeout = setTimeout(() => {
+        menu.classList.add("opacity-0", "invisible", "pointer-events-none");
+        menu.classList.remove("opacity-100", "visible", "pointer-events-auto");
+      }, 300); // 300ms delay before hiding
+    });
+
+    menu.addEventListener("mouseenter", () => {
+      clearTimeout(hideTimeout);
+    });
+
+    menu.addEventListener("mouseleave", () => {
+      hideTimeout = setTimeout(() => {
+        menu.classList.add("opacity-0", "invisible", "pointer-events-none");
+        menu.classList.remove("opacity-100", "visible", "pointer-events-auto");
+      }, 300);
+    });
+  </script>
+</header>
 
     <!-- Page Content -->
     <main class="pt-24 space-y-24 max-w-6xl mx-auto px-6">
